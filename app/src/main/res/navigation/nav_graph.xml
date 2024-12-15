@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_places">
+
+    <fragment
+        android:id="@+id/navigation_places"
+        android:name="com.locado.app.ui.fragment.places.PlacesFragment"
+        android:label="fragment_places"
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_placesFragment_to_favouritesFragment"
+            app:destination="@id/navigation_favourites" />
+        <action
+            android:id="@+id/action_placeFragment_to_guideFragment"
+            app:destination="@id/navigation_guide" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_favourites"
+        android:name="com.locado.app.ui.fragment.favourites.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+    <fragment
+        android:id="@+id/navigation_guide"
+        android:name="com.locado.app.ui.fragment.guide.GuideFragment"
+        android:label="fragment_guide"
+        tools:layout="@layout/fragment_guide" />
+</navigation>
