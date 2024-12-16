@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- İç Taralı Daire -->
+    <item>
+        <shape
+            android:shape="oval">
+            <solid android:color="#1A73E84C"/>
+            <size
+                android:width="200dp"
+                android:height="200dp"/>
+            <stroke
+                android:color="@color/main"
+            android:width="2dp"/>
+        </shape>
+    </item>
+
+
+</layer-list>
+

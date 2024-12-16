@@ -88,6 +88,8 @@ dependencies {
 
     implementation (libs.play.services.location)
 
+    implementation (libs.picasso)
+
 
 
 

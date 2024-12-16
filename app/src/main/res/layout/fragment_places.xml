@@ -8,17 +8,74 @@
 
     <com.google.android.material.card.MaterialCardView
 
-        app:shapeAppearanceOverlay="@style/BottomCornersShape"
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/BottomCornersShape">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <!-- Arkaplan Dairesi -->
+
+            <!-- Metin (Yaricap) TextView -->
+
+            <ImageView
+                android:id="@+id/imgLocationCircle"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_place"
+                app:layout_constraintBottom_toBottomOf="@+id/kmText"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/kmText" />
+
+            <ImageView
+                android:id="@+id/imgUp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toTopOf="@+id/imgDown"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toEndOf="@+id/circleBackground"
+                app:layout_constraintTop_toTopOf="@+id/circleBackground" />
+
+            <ImageView
+                android:id="@+id/imgDown"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="@+id/circleBackground"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toEndOf="@+id/circleBackground"
+                app:layout_constraintTop_toBottomOf="@+id/imgUp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:background="@color/main"
+                app:layout_constraintBottom_toBottomOf="@+id/circleBackground"
+                app:layout_constraintEnd_toEndOf="@+id/circleBackground"
+                app:layout_constraintTop_toTopOf="@+id/circleBackground" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circleBackground"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/circle_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
                 android:id="@+id/textView"
@@ -37,7 +94,6 @@
                 android:id="@+id/tVType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:background="@android:drawable/editbox_background"
                 android:drawableEnd="@drawable/ic_arrow_down"
                 android:fontFamily="@font/alegreya_bold"
@@ -45,39 +101,24 @@
                 android:text="@string/restaurant"
                 android:textColor="@color/main"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider"
 
+                app:layout_constraintStart_toEndOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/kmText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/alegreya_bold"
                 android:text="@string/km"
                 android:textColor="@color/main"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/seekBar"
-                app:layout_constraintEnd_toStartOf="@+id/divider"
-                app:layout_constraintStart_toEndOf="@+id/seekBar"
-                app:layout_constraintTop_toTopOf="@+id/seekBar" />
-
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:max="10"
-                android:progress="1"
-                android:progressBackgroundTint="@color/main"
-                android:progressTint="@color/main"
-                android:thumbTint="@color/main"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/kmText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -134,4 +175,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+    <TextView
+        android:id="@+id/tvNoPlaces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/alegreya_regular"
+        android:text="@string/no_places_result"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgNoPlaces" />
+
+    <ImageView
+        android:id="@+id/imgNoPlaces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mood_bad"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

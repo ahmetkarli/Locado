@@ -17,15 +17,15 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.locado.app.R
 import com.locado.app.databinding.FragmentPlacesBinding
-import com.locado.app.helper.Constants
 import com.locado.app.helper.Constants.placeTypes
+import com.locado.app.ui.fragment.places.adapter.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,6 +40,8 @@ class PlacesFragment : Fragment() {
 
     private var dialog: Dialog? = null
 
+    private lateinit var placeAdapter: PlaceAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +53,21 @@ class PlacesFragment : Fragment() {
     }
 
     private fun initObservers() {
+        viewModel.placesListLiveData.observe(viewLifecycleOwner){ placeList ->
+            if(placeList.isEmpty()){
+                binding.imgNoPlaces.visibility = View.VISIBLE
+                binding.tvNoPlaces.visibility = View.VISIBLE
+            }else{
+                binding.imgNoPlaces.visibility = View.GONE
+                binding.tvNoPlaces.visibility = View.GONE
 
+            }
+
+            placeAdapter = PlaceAdapter(requireContext(), placeList)
+            binding.rVPlaces.adapter = placeAdapter
+            binding.rVPlaces.layoutManager = LinearLayoutManager(requireContext())
+
+        }
 
     }
 
@@ -72,7 +88,7 @@ class PlacesFragment : Fragment() {
             val listView: ListView = dialog!!.findViewById(R.id.list_view)
             val placeTypeStrings = placeTypes.map { getString(it) }
 
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, placeTypeStrings)
+            val adapter = ArrayAdapter(requireContext(), R.layout.locado_text_view, placeTypeStrings)
 
 
             listView.adapter = adapter
@@ -111,31 +127,17 @@ class PlacesFragment : Fragment() {
 
         }
 
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(progress==0){
-                    binding.seekBar.progress = 1
-                    binding.kmText.text = "${binding.seekBar.progress} km"
-                    viewModel.updateDistance(binding.seekBar.progress)
-                }else{
-                    binding.kmText.text = "${progress} km"
-                    viewModel.updateDistance(progress)
+        binding.imgUp.setOnClickListener {
+            viewModel.updateDistance(viewModel.distanceLiveData.value!!+1000.0)
+            binding.kmText.text = "${(viewModel.distanceLiveData.value!! /1000).toInt()} km"
+        }
 
-                }
-
-
+        binding.imgDown.setOnClickListener {
+            if(viewModel.distanceLiveData.value != 1000.0){
+                viewModel.updateDistance(viewModel.distanceLiveData.value!!-1000.0)
+                binding.kmText.text = "${(viewModel.distanceLiveData.value!!/1000).toInt()} km"
             }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
-            }
-        })
-
-
+        }
 
     }
 

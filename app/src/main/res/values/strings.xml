@@ -3,7 +3,7 @@
     <string name="guide">Guide</string>
     <string name="favourites">Favourites</string>
     <string name="places">Places</string>
-    <string name="places_api_key">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+    <string name="places_api_key">AIzaSyCYL1nNAb_u-qPGNx5fnCyVEuncd_qOr6Y</string>
     <string name="distance">Maximum Distance</string>
     <string name="km">1 km</string>
     <string name="place_type">Place Type</string>
@@ -106,6 +106,12 @@
     <string name="veterinary_care">Veterinary Care</string>
     <string name="zoo">Zoo</string>
     <string name="places_type">Places Type</string>
-    <string name="searchHint">Search...</string>
+    <string name="searchHint">Search…</string>
+    <string name="no_places_result">Place Not Found</string>
+    <string name="open">Open</string>
+    <string name="close">Kapalı</string>
+    <string name="more_info">For more information →</string>
+
+
 </resources>
 

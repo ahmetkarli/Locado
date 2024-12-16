@@ -106,6 +106,10 @@
     <string name="veterinary_care">Veteriner</string>
     <string name="zoo">Hayvanat Bahçesi</string>
     <string name="places_type">Mekan Tipi</string>
-    <string name="searchHint">Ara...</string>
+    <string name="searchHint">Ara…</string>
+    <string name="no_places_result">Mekan Bulunamadı</string>
+    <string name="open">Açık</string>
+    <string name="close">Kapalı</string>
+    <string name="more_info">Daha fazla bilgi →</string>
 </resources>
 

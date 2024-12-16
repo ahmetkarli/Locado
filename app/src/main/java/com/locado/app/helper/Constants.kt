@@ -1,9 +1,10 @@
 package com.locado.app.helper
 
+import com.google.android.gms.maps.model.LatLng
 import com.locado.app.R
 
 object Constants {
-    const val BASE_URL = "https://rickandmortyapi.com/api/"
+    const val BASE_URL = "https://maps.googleapis.com/maps/api/"
 
     val placeValues = listOf(
         "accounting",
@@ -203,8 +204,7 @@ object Constants {
         R.string.zoo
     )
 
-
-
+    lateinit var lastLocation:LatLng
 
 
 
