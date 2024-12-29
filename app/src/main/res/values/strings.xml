@@ -109,8 +109,17 @@
     <string name="searchHint">Search…</string>
     <string name="no_places_result">Place Not Found</string>
     <string name="open">Open</string>
-    <string name="close">Kapalı</string>
+    <string name="close">Close</string>
     <string name="more_info">For more information →</string>
+    <string name="route">Directions</string>
+    <string name="all">All</string>
+    <string name="city_guide">%1$s Guide</string>
+    <string name="history">History</string>
+    <string name="places_to_visit">Places to Visit</string>
+    <string name="travel_souvenir">Travel Souvenir</string>
+    <string name="traditional_cuisine">Traditional Cuisine</string>
+    <string name="tourism_activities">Tourism Activities</string>
+    <string name="cultrual_atlas">Cultural Atlas</string>
 
 
 </resources>

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_placeFragment_to_guideFragment"
             app:destination="@id/navigation_guide" />
+        <action
+            android:id="@+id/action_navigation_places_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_favourites"
@@ -26,5 +29,27 @@
         android:id="@+id/navigation_guide"
         android:name="com.locado.app.ui.fragment.guide.GuideFragment"
         android:label="fragment_guide"
-        tools:layout="@layout/fragment_guide" />
+        tools:layout="@layout/fragment_guide" >
+        <action
+            android:id="@+id/action_navigation_guide_to_guideDetailFragment"
+            app:destination="@id/guideDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.locado.app.ui.fragment.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="placeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/guideDetailFragment"
+        android:name="com.locado.app.ui.fragment.guide.detail.GuideDetailFragment"
+        android:label="fragment_guide_detail"
+        tools:layout="@layout/fragment_guide_detail" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
 </navigation>

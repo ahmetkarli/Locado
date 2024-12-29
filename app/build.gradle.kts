@@ -90,6 +90,11 @@ dependencies {
 
     implementation (libs.picasso)
 
+    implementation (libs.circleindicator)
+
+    implementation (libs.jsoup.v1153)
+
+    implementation (libs.lottie)
 
 
 

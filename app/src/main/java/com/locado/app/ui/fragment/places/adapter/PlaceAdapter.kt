@@ -3,12 +3,15 @@ package com.locado.app.ui.fragment.places.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.model.Place
 import com.locado.app.R
 import com.locado.app.databinding.ItemPlaceBinding
 import com.locado.app.helper.Constants
 import com.locado.app.helper.Helper
+import com.locado.app.ui.fragment.places.PlacesFragmentDirections
 import com.squareup.picasso.Picasso
 
 class PlaceAdapter(private var context: Context, private var places: List<Place>) :
@@ -60,6 +63,8 @@ class PlaceAdapter(private var context: Context, private var places: List<Place>
 
             holder.binding.root.setOnClickListener {
 
+                val action = PlacesFragmentDirections.actionNavigationPlacesToDetailFragment(currentPlace.id)
+                it.findNavController().navigate(action)
 
             }
         }
@@ -71,4 +76,6 @@ class PlaceAdapter(private var context: Context, private var places: List<Place>
 
 
 }
+
+
 

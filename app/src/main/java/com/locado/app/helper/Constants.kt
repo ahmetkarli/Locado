@@ -205,6 +205,7 @@ object Constants {
     )
 
     lateinit var lastLocation:LatLng
+    lateinit var placeLocation:LatLng
 
 
 

@@ -111,5 +111,15 @@
     <string name="open">Açık</string>
     <string name="close">Kapalı</string>
     <string name="more_info">Daha fazla bilgi →</string>
+    <string name="route">Yol Tarifi</string>
+    <string name="all">Tümü</string>
+    <string name="city_guide">%1$s Rehberi</string>
+    <string name="history">Tarihçe</string>
+    <string name="places_to_visit">Gezilecek Yerler</string>
+    <string name="travel_souvenir">Seyahat Hatırası</string>
+    <string name="traditional_cuisine">Geleneksel Mutfak</string>
+    <string name="tourism_activities">Turizm Aktiviteleri</string>
+    <string name="cultrual_atlas">Kültür Atlası</string>
+
 </resources>
 

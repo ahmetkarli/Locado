@@ -19,10 +19,11 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.locado.app.R
+import com.locado.app.base.BaseFragment
 import com.locado.app.databinding.FragmentPlacesBinding
 import com.locado.app.helper.Constants.placeTypes
 import com.locado.app.ui.fragment.places.adapter.PlaceAdapter
@@ -30,17 +31,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PlacesFragment : Fragment() {
+class PlacesFragment : BaseFragment<FragmentPlacesBinding>() {
 
     private val viewModel: PlacesViewModel by viewModels()
-
-
-    private var _binding: FragmentPlacesBinding? = null
-    private val binding get() = _binding!!
 
     private var dialog: Dialog? = null
 
     private lateinit var placeAdapter: PlaceAdapter
+
+    private val isLoading = MutableLiveData<Boolean>()
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,11 +52,21 @@ class PlacesFragment : Fragment() {
 
     }
 
-    private fun initObservers() {
+    override fun initObservers() {
+
+        isLoading.observe(viewLifecycleOwner) {
+            if (!it) {
+                hideLoading()
+            }
+        }
+
         viewModel.placesListLiveData.observe(viewLifecycleOwner){ placeList ->
+            isLoading.postValue(false)
+            binding.cL.visibility = View.VISIBLE
             if(placeList.isEmpty()){
                 binding.imgNoPlaces.visibility = View.VISIBLE
                 binding.tvNoPlaces.visibility = View.VISIBLE
+
             }else{
                 binding.imgNoPlaces.visibility = View.GONE
                 binding.tvNoPlaces.visibility = View.GONE
@@ -66,15 +76,19 @@ class PlacesFragment : Fragment() {
             placeAdapter = PlaceAdapter(requireContext(), placeList)
             binding.rVPlaces.adapter = placeAdapter
             binding.rVPlaces.layoutManager = LinearLayoutManager(requireContext())
+            binding.rVPlaces.layoutManager?.onRestoreInstanceState(viewModel.scrollPosition)
 
         }
 
     }
 
-    private fun initListeners() {
+    override fun initListeners() {
 
         binding.btnSearch.setOnClickListener {
+            showLoading()
             viewModel.getNearBy(requireContext())
+            viewModel.scrollPosition = null
+
         }
 
         binding.tVType.setOnClickListener {
@@ -111,14 +125,12 @@ class PlacesFragment : Fragment() {
             listView.onItemClickListener =
                 OnItemClickListener { parent, view, position, id -> // when item selected from list
 
-
                     adapter.getItem(position)?.let { it1 ->
                         binding.tVType.text = it1
 
                         val typeIndex = placeTypeStrings.indexOf(it1)
                         viewModel.updatePlaceName(typeIndex)
-
-
+                        viewModel.updatePlaceTextId(typeIndex)
                     }
 
 
@@ -141,8 +153,14 @@ class PlacesFragment : Fragment() {
 
     }
 
-    private fun initView() {
 
+
+    override fun initView() {
+
+        showLoading()
+
+        binding.tVType.text = requireContext().getString(viewModel.placeTextNameLiveData.value!!)
+        binding.kmText.text = "${(viewModel.distanceLiveData.value!! /1000).toInt()} km"
 
         when {
             (ContextCompat.checkSelfPermission(
@@ -174,21 +192,19 @@ class PlacesFragment : Fragment() {
 
     }
 
-
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPlacesBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        container: ViewGroup?
+    ): FragmentPlacesBinding {
+        return FragmentPlacesBinding.inflate(inflater, container, false)
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onPause() {
+        super.onPause()
+        viewModel.scrollPosition =  binding.rVPlaces.layoutManager?.onSaveInstanceState()
     }
+
 
     companion object {
         private const val TAG = "PlacesFragment"

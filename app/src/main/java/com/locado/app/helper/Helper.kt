@@ -1,6 +1,11 @@
 package com.locado.app.helper
 
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import androidx.core.graphics.drawable.toDrawable
 import com.google.android.gms.maps.model.LatLng
+import com.locado.app.R
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -32,6 +37,19 @@ object Helper {
             "${(distanceKm * 1000).toInt()} m"
         } else {
             "%.2f km".format(distanceKm)
+        }
+    }
+
+    fun showLoadingDialog(context: Context): Dialog {
+        val progressDialog = Dialog(context)
+        progressDialog.let {
+            it.show()
+            it.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+            it.setContentView(R.layout.progress_dialog)
+            it.setCancelable(false)
+            it.setCanceledOnTouchOutside(false)
+
+            return it
         }
     }
 }
